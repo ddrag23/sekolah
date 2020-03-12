@@ -27,13 +27,16 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-      <?php 
-      $info = $this->session->flashdata('pesan');
-      if (!empty($info)):?>
-        <div class="alert alert-danger" role="alert">
-          <?= $info?>
-        </div>
-      <?php endif;?>
+      <?php if ($this->session->flashdata('sukses')): ?>
+      <div class="alert alert-success">
+      <?= $this->session->flashdata('sukses'); ?>
+      </div>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('pesan')): ?>
+      <div class="alert alert-danger">
+      <?= $this->session->flashdata('pesan'); ?>
+      </div>
+    <?php endif; ?>
       <form action="<?= base_url('auth');?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="username" placeholder="Username" value="<?= set_value('username');?>" >
@@ -60,6 +63,9 @@
           </div>
           <!-- /.col -->
       </form>
+        <p class="mb-0">
+        <a href="<?= site_url('auth/register'); ?>" class="text-center">Register a new membership</a>
+      </p>
     </div>
     <!-- /.login-card-body -->
   </div>

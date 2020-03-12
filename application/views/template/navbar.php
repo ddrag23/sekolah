@@ -58,9 +58,10 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+          
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <?php if ($this->session->userdata('level') == 'admin' | $this->session->userdata('level')=='guru'):?>
           <li class="nav-item">
             <a href="<?= site_url('dashboard');?>" class="nav-link">
              <i class="fas fa-tachometer-alt"></i>
@@ -69,6 +70,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?= site_url('ppdb');?>" class="nav-link">
+             <i class="fas fa-tachometer-alt"></i>
+              <p>
+                Ppdb
+              </p>
+            </a>
+          </li>          
           <li class="nav-item">
             <a href="<?= site_url('siswa');?>" class="nav-link">
              <i class="fas fa-tachometer-alt"></i>
@@ -101,6 +110,7 @@
               </p>
             </a>
           </li>
+        <?php endif; ?>
           <?php if ($this->session->userdata('level') == 'admin') :?>
             <li class="nav-header">Users</li>
           <li class="nav-item">

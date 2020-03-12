@@ -2,12 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
+    public function __construct(){
+        parent::__construct();
+        $this->load->model('m_user', 'users');
+    }
 
     public function index(){
         // cekAlreadyLogin();
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
         if ($this->form_validation->run() == false) {
+            $this->session->flashdata('');
             $this->load->view('module/auth/login');
         }else {
             $this->proses();
@@ -19,7 +24,6 @@ class Auth extends CI_Controller {
         $post = $this->input->post(null, TRUE);
         if (isset($post['login'])) {
             
-            $this->load->model('M_user', 'users');
             $query = $this->users->login($post);
             //   cek user
             if ($query->num_rows() > 0) {
@@ -30,6 +34,9 @@ class Auth extends CI_Controller {
             );
             // echo json_encode($row);die();
             $this->session->set_userdata($params);
+            if ($this->session->userdata('level') == 'siswa') {
+                redirect('ppdb','refresh');
+            }
             $this->session->set_flashdata('sukses', 'Selamat data di pengelolahan data siswa');
             redirect('dashboard');
           }else {
@@ -40,7 +47,21 @@ class Auth extends CI_Controller {
     }
 
        public function register(){
+        $this->form_validation->set_rules('nama' , 'Nama', 'required');
+        $this->form_validation->set_rules('username' , 'Username', 'required');
+        $this->form_validation->set_rules('password' , 'Password', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            # code...
+            $this->session->flashdata('gagal','harus di isi');
         $this->load->view('module/auth/register');
+        } else {
+            $post = $this->input->post(null, TRUE);
+            $this->users->register($post);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('sukses', 'registrasi berhasil silahkan login');
+                redirect('auth','refresh');
+            }
+        }
         
     }
 

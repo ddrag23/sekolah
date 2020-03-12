@@ -17,6 +17,7 @@ class M_siswa extends CI_Model
       public function getAktif()
     {
         $this->db->join('kelas', 'kelas.id_kelas = users.kelas_id', 'left');
+        $this->db->join('siswa', 'siswa.id_siswa = users.siswa_id', 'left');
         $this->db->join('status', 'status.id_status = users.status_id', 'left');
         $this->db->where('level', 'siswa');
         $this->db->where('status_id', '1');
@@ -83,5 +84,17 @@ class M_siswa extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->delete('users');
+    }
+    public function ppdb($post){
+        $created = date('Y-m-d H:i:s');
+        $params = array(
+            'nama_ayah' => $post['ayah'],
+            'nama_ibu' => $post['ibu'],
+            'date_created' => $created
+        );
+        $this->db->insert('siswa', $params);
+        $siswa_id = $this->db->insert_id();
+        $params1 = array('siswa_id' => $siswa_id);
+        $this->db->insert('users', $params1);
     }
 }

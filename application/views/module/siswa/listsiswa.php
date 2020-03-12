@@ -29,6 +29,8 @@
             <td><?= $key->gender;?></td>
             <td><?= $key->nama_kelas;?></td>
             <td><?= $key->nama_status;?></td>
+            <td><?= $key->nama_ayah;?></td>
+            <td><?= $key->nama_ibu;?></td>
             <td width="160px" class="text-center">
               <a href="<?=site_url('siswa/edit/'.$key->id); ?>" class="btn btn-success btn-xs"><i class="fas fa-edit"></i> Ubah</a>
 

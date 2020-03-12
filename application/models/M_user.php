@@ -10,6 +10,18 @@ class M_user extends CI_Model
         $this->db->where('password', htmlspecialchars(sha1($post['password'])));
         return $this->db->get();
     }
+    public function register($post)
+    {
+        $created = date('Y-m-d H:i:s');
+        $params = array(
+            'nama' => $post['nama'],
+            'username' => $post['username'],
+            'password' => sha1($post['password']),
+            'level' => 'siswa',
+            'date_created' => $created
+        );
+        $this->db->insert('users', $params);
+    }
 
     public function get($id = null){
         $this->db->from('users');
