@@ -29,7 +29,9 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-     
+     <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Level : <?= ucfirst($this->session->userdata('level')); ?></a>
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -61,55 +63,60 @@
           
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <?php if ($this->session->userdata('level') == 'admin' | $this->session->userdata('level')=='guru'):?>
+          <?php if ($this->session->userdata('level') == 'admin' | $this->session->userdata('level')=='guru'):?>
           <li class="nav-item">
-            <a href="<?= site_url('dashboard');?>" class="nav-link">
-             <i class="fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= site_url('ppdb');?>" class="nav-link">
-             <i class="fas fa-tachometer-alt"></i>
-              <p>
-                Ppdb
-              </p>
-            </a>
-          </li>          
-          <li class="nav-item">
-            <a href="<?= site_url('siswa');?>" class="nav-link">
-             <i class="fas fa-tachometer-alt"></i>
-              <p>
-                Siswa
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= site_url('siswa/siswamutasi');?>" class="nav-link">
-             <i class="fas fa-calendar-day"></i>
-              <p>
-                Siswa mutasi
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= site_url('siswa/alumni');?>" class="nav-link">
-             <i class="fas fa-calendar-day"></i>
-              <p>
-                Alumni
-              </p>
-            </a>
-          </li> 
-          <li class="nav-item">
-            <a href="<?= site_url('kelas');?>" class="nav-link">
-             <i class="fas fa-calendar-day"></i>
-              <p>
-                Kelas
-              </p>
-            </a>
-          </li>
+              <a href="<?= site_url('dashboard'); ?>" class="nav-link <?= activeMenu('dashboard'); ?>">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                </p>
+              </a>
+            </li>
+          <li class="nav-item has-treeview menu-open">
+              <a href="#" class="nav-link <?= activeMenu('siswa'); ?>">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Siswa
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?= site_url('siswa'); ?>" class="nav-link <?= activeSubMenu('index'); ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Aktif</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= site_url('siswa/siswamutasi'); ?>" class="nav-link <?= activeSubMenu('siswamutasi'); ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mutasi</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?= site_url('siswa/alumni'); ?>" class="nav-link <?= activeSubMenu('alumni'); ?>">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Alumni</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url('ppdb');?>" class="nav-link <?= activeMenu('ppdb');?>">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  PPDB
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= site_url('master');?>" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Kelas
+                </p>
+              </a>
+            </li>
         <?php endif; ?>
           <?php if ($this->session->userdata('level') == 'admin') :?>
             <li class="nav-header">Users</li>

@@ -34,11 +34,6 @@
                     <?= form_error('passconf'); ?>
                   </div>
                   <div class="form-group">
-                    <label for="nikp">Nip</label>
-                    <input type="text" class="form-control" name="nmr_induk" placeholder="Nik" value="<?= $this->input->post('nmr_induk') ?? $query->nmr_induk; ?>">
-                    <?= form_error('nik'); ?>
-                  </div>
-                  <div class="form-group">
                     <label for="alamat">Alamat</label>
                     <textarea name="alamat" class="form-control" cols="30" rows="5"><?= $this->input->post('username') ?? $query->alamat;  ?></textarea>
                     <?= form_error('alamat'); ?>
@@ -56,6 +51,15 @@
                   		<option value="guru" <?= $level == 'guru' ? "selected" : null; ?>>Guru</option>
                   	</select>
                     <?= form_error('level'); ?>
+                  </div>
+                  <div class="form-group">
+                    <label for="aktif">Aktif User</label><small>(angka 0 user tidak aktif dan 1 user aktif)</small>
+                    <select name="aktif" class="form-control">
+                      <?php $aktif = $this->input->post('aktif') ? $this->input->post('aktif') : $query->is_active; ?>
+                      <option value="0" <?= $aktif == '0' ? "selected" : null; ?>>Tidak aktif</option>
+                      <option value="1" <?= $aktif == '1' ? "selected" : null; ?>>Aktif</option>
+                    </select>
+                    <?= form_error('aktif'); ?>
                   </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

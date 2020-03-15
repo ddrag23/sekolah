@@ -23,18 +23,18 @@
             <?php $no =0; foreach($try as $key):?>
           <tr>
             <td><?= ++$no;?></td>
-            <td><?= $key->nmr_induk;?></td>
-            <td><?= $key->nama;?></td>
-            <td><?= $key->alamat;?></td>
+            <td><?= $key->nis;?></td>
+            <td><?= $key->nama_siswa;?></td>
+            <td><?= $key->alamat_siswa;?></td>
             <td><?= $key->gender;?></td>
             <td><?= $key->nama_kelas;?></td>
             <td><?= $key->nama_status;?></td>
             <td><?= $key->nama_ayah;?></td>
             <td><?= $key->nama_ibu;?></td>
             <td width="160px" class="text-center">
-              <a href="<?=site_url('siswa/edit/'.$key->id); ?>" class="btn btn-success btn-xs"><i class="fas fa-edit"></i> Ubah</a>
+              <a href="<?=site_url('siswa/edit/'.$key->id_siswa); ?>" class="btn btn-success btn-xs"><i class="fas fa-edit"></i> Ubah</a>
 
-              <a href="<?=site_url('siswa/delete/'.$key->id); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
+              <a href="<?=site_url('siswa/delete/'.$key->id_siswa); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
 
             </td>
           </tr>

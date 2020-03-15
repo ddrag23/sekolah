@@ -32,9 +32,9 @@
       <?= $this->session->flashdata('sukses'); ?>
       </div>
     <?php endif; ?>
-    <?php if ($this->session->flashdata('pesan')): ?>
+    <?php if ($this->session->flashdata('gagal')): ?>
       <div class="alert alert-danger">
-      <?= $this->session->flashdata('pesan'); ?>
+      <?= $this->session->flashdata('gagal'); ?>
       </div>
     <?php endif; ?>
       <form action="<?= base_url('auth');?>" method="post">

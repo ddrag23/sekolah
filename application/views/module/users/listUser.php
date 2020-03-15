@@ -15,9 +15,9 @@
             <th>No</th>
             <th>Username</th>
             <th>Nama</th>
-            <th>Nomer Induk</th>
             <th>Alamat</th>
             <th>Level</th>
+            <th>Status User</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -27,9 +27,9 @@
             <td><?= ++$no;?></td>
             <td><?= $key->username;?></td>
             <td><?= $key->nama;?></td>
-            <td><?= $key->nmr_induk;?></td>
             <td><?= $key->alamat;?></td>
             <td><?= $key->level;?></td>
+            <td><?= $key->is_active;?></td>
             <td width="160px" class="text-center">
               <a href="<?=site_url('user/edit/'.$key->id); ?>" class="btn btn-success btn-xs"><i class="fa fa-user-edit"></i> Ubah</a>
 

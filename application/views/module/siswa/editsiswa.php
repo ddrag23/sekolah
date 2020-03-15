@@ -1,7 +1,7 @@
  <div class="card">
       <div class="card-header">
         <h3 class="card-title">Tambah User</h3>
-        <a href="<?=site_url('user'); ?>" class="btn btn-primary float-right"><i class="fa fa-user-plus"></i> Kembali</a>
+        <a href="<?=site_url('siswa'); ?>" class="btn btn-primary float-right"><i class="fa fa-user-plus"></i> Kembali</a>
       </div>
       <div class="row">
       	<div class="col-md-12">
@@ -12,40 +12,25 @@
   						<div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('sukses');; ?></div>
   			        <?php endif; ?>
   			        <!-- end pesan validasi -->
-                <input type="hidden" name="id" value="<?= $query->id; ?>">
+                <input type="hidden" name="id" value="<?= $query->id_siswa; ?>">
                   <div class="form-group">
                     <label for="nama">Nama Lengkap</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?= $this->input->post('nama') ?? $query->nama; ?>">
+                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?= $this->input->post('nama') ?? $query->nama_siswa; ?>">
                     <?= form_error('nama'); ?>
                   </div>
                   <div class="form-group">
-                    <label for="nama">Username</label>
-                    <input type="text" class="form-control" name="username" placeholder="Username" value="<?= $this->input->post('username') ?? $query->username; ?>">
-                    <?= form_error('username'); ?>
-                  </div>
-                  <div class="form-group">
                     <label for="nis">Nis</label>
-                    <input type="text" class="form-control" name="nmr_induk" placeholder="Nis" value="<?= $this->input->post('nmr_induk') ?? $query->nmr_induk; ?>">
-                    <?= form_error('nmr_induk'); ?>
-                  </div>
-                  <div class="form-group">
-                    <label for="pass">Paswword</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password" value="">
-                    <?= form_error('password'); ?>
-                  </div>
-                  <div class="form-group">
-                    <label for="nis">Nis</label>
-                    <input type="password" class="form-control" name="passconf" placeholder="Konfirmasi Password" value="">
-                    <?= form_error('password'); ?>
+                    <input type="text" class="form-control" name="nis" placeholder="Nis" value="<?= $this->input->post('nis') ?? $query->nis; ?>">
+                    <?= form_error('nis'); ?>
                   </div>
                   <div class="form-group">
                     <label for="alamat">Alamat</label>
-                    <textarea name="alamat" class="form-control" cols="30" rows="5"><?= $this->input->post('username') ?? $query->alamat;  ?></textarea>
+                    <textarea name="alamat" class="form-control" cols="30" rows="5"><?= $this->input->post('username') ?? $query->alamat_siswa;  ?></textarea>
                     <?= form_error('alamat'); ?>
                   </div>
                   <div class="form-group">
                     <label for="nomor">Nomor Telepon</label>
-                    <input type="text" class="form-control" name="nomor" placeholder="Nomor Telepon" value="<?= $this->input->post('nomor') ?? $query->nmr_telp; ?>">
+                    <input type="text" class="form-control" name="nomor" placeholder="Nomor Telepon" value="<?= $this->input->post('nomor') ?? $query->no_hp; ?>">
                     <?= form_error('nomor'); ?>
                   </div>
                   <div class="form-group">

@@ -8,6 +8,7 @@ class M_user extends CI_Model
         $this->db->from('users');
         $this->db->where('username', htmlspecialchars($post['username']));
         $this->db->where('password', htmlspecialchars(sha1($post['password'])));
+        $this->db->where('is_active','1');
         return $this->db->get();
     }
     public function register($post)
@@ -30,12 +31,6 @@ class M_user extends CI_Model
         }
         return $this->db->get();
     }
-    public function getSiswa()
-    {
-        $this->db->join('kelas', 'kelas.id_kelas = users.kelas_id', 'left');
-        $this->db->where('level', 'siswa');
-        return $this->db->get('users');
-    }
     public function add($post)
     {
         $created_by = $this->session->userdata('id');
@@ -44,10 +39,10 @@ class M_user extends CI_Model
             'nama' => $post['nama'],
             'username' => $post['username'],
             'password' => sha1($post['username']),
-            'nmr_induk' => $post['nmr_induk'],
             'alamat' => $post['alamat'],
             'nmr_telp' => $post['nomor'],
             'level' => $post['level'],
+            'is_active' => '1',
             'date_created' => $created,
             'created_by' => $created_by
         );
@@ -61,10 +56,10 @@ class M_user extends CI_Model
             'nama' => $post['nama'],
             'username' => $post['username'],
             'password' => !empty($post['password']) ? sha1($post['password']) : null,
-            'nmr_induk' => $post['nmr_induk'],
             'alamat' => $post['alamat'] != "" ? $post['alamat'] : null,
             'nmr_telp' => $post['nomor'],
             'level' => $post['level'],
+            'is_active' => $post['aktif'],
             'modified_by' => $modifBy,
             'modified_created' => $modified 
         );

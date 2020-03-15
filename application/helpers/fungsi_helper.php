@@ -13,4 +13,14 @@ function cekNotLogin(){
         redirect('auth');
     }
 }
+function activeMenu($menu){
+    $ci =& get_instance();
+    $classname = $ci->router->fetch_class();
+    return $classname == $menu ? 'active' : null;
+}
+function activeSubMenu($subMenu){
+    $CI =& get_instance();
+    $methodName = $CI->router->fetch_method();;
+    return $methodName == $subMenu ? 'active' : null;
+}
 ?>

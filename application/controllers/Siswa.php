@@ -11,6 +11,7 @@ class Siswa extends CI_Controller
 		parent::__construct();
 		cekNotLogin();
 		$this->load->model('m_siswa');
+        $this->load->model('m_master');
 	}
 	public function index()
 	{
@@ -40,7 +41,7 @@ class Siswa extends CI_Controller
 
 public function add()
     {
-    	$this->form_validation->set_rules('nmr_induk', 'nmr_induk', 'required|min_length[5]|is_unique[users.nmr_induk]');
+    	$this->form_validation->set_rules('nis', 'nis', 'required|min_length[5]|is_unique[siswa.nis]');
     	$this->form_validation->set_rules('nama', 'Nama', 'required');
     	$this->form_validation->set_rules('alamat', 'Alamat', 'required');
     	$this->form_validation->set_rules('nomor', 'Nomor Telepon', 'required');
@@ -57,7 +58,7 @@ public function add()
 			    	$this->load->view('template/main', [
 			    		'src' => 'module/siswa/addsiswa',
 			    		'page' => 'tambah siswa',
-			    		"join" => $this->m_kelas->get()->result()
+			    		"join" => $this->m_master->getKelas()->result()
 			    	]);
                 }
                 else
@@ -72,20 +73,11 @@ public function add()
                 }
     	
     }
-    public function edit($id)
+    public function edit($id_siswa)
     {
     	$this->form_validation->set_rules('nama', 'Nama', 'required');
-    	$this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|callback_username_check');
-        // validasi pass jika terisi
-        if ($this->input->post('password')) {
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
-        $this->form_validation->set_rules('passconf', 'Konfirmasi password', 'min_length[5]matches[password]', array('matches' => '%s tidak sesuai dengan password' ));
-        }
-        if ($this->input->post('passconf')) {
-        $this->form_validation->set_rules('passconf', 'Konfirmasi password', 'min_length[5]matches[password]', array('matches' => '%s tidak sesuai dengan password' ));
-        }
     	$this->form_validation->set_rules('alamat', 'Alamat', 'required');
-    	$this->form_validation->set_rules('nmr_induk', 'Nis', 'required|min_length[1]|numeric');
+    	$this->form_validation->set_rules('nis', 'Nis', 'required|min_length[1]|numeric');
     	$this->form_validation->set_rules('nomor', 'Nomor Telepon', 'required|numeric');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
@@ -99,7 +91,7 @@ public function add()
 
     	 if ($this->form_validation->run() == FALSE)
                 {
-                    $query = $this->m_siswa->get($id);
+                    $query = $this->m_siswa->get($id_siswa);
                     if ($query->num_rows() > 0) {
 							$this->load->view('template/main', [
                         	"src" => "module/siswa/editsiswa",
@@ -121,7 +113,7 @@ public function add()
                 		$this->session->set_flashdata('sukses', 'data berhasil ditambahkan');
                 	}
                 	$this->session->set_flashdata('gagal', 'data gagal ditambkan');
-                	redirect('siswa/edit/'.$id,'refresh');
+                	redirect('siswa/edit/'.$id_siswa,'refresh');
                 }
     }
 
@@ -131,14 +123,15 @@ public function add()
         $this->session->set_flashdata('hapus','Data berhasil dihapus');
         redirect('user','refresh');
     }
-    public function username_check()
-    {
-        $post = $this->input->post(null, TRUE);
-        $query = $this->db->query("SELECT * FROM users WHERE username = '$post[username]' AND id != '$post[id]' ");
-        if ($query->num_rows() > 0) {
-            $this->form_validation->set_message('username_check', '{field} sudah terpakai');
-            return FALSE;
-        }else{
-            return TRUE;
-        }
-    }}
+    // public function username_check()
+    // {
+    //     $post = $this->input->post(null, TRUE);
+    //     $query = $this->db->query("SELECT * FROM siswa WHERE nis = '$post[nis]' AND id_siswa != '$post[id]' ");
+    //     if ($query->num_rows() > 0) {
+    //         $this->form_validation->set_message('username_check', '{field} sudah terpakai');
+    //         return FALSE;
+    //     }else{
+    //         return TRUE;
+    //     }
+    // }
+}

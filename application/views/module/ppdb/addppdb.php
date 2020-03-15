@@ -1,7 +1,7 @@
  <div class="card">
       <div class="card-header">
         <h3 class="card-title">Tambah User</h3>
-        <a href="<?=site_url('siswa'); ?>" class="btn btn-primary float-right"><i class="fa fa-user-plus"></i> Kembali</a>
+        <a href="<?=site_url('ppdb'); ?>" class="btn btn-primary float-right"><i class="fa fa-user-plus"></i> Kembali</a>
       </div>
       <div class="row">
       	<div class="col-md-12">
@@ -12,6 +12,7 @@
   						<div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('sukses'); ?></div>
   			        <?php endif; ?>
   			        <!-- end pesan validasi -->
+                <input type="hidden" name="id" value="<?= $this->session->userdata('id'); ?>">
                   <div class="form-group">
                     <label for="nama">Nama Lengkap</label>
                     <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" value="<?= set_value('nama'); ?>">

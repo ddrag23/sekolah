@@ -57,7 +57,6 @@ class User extends CI_Controller {
         $this->form_validation->set_rules('passconf', 'Konfirmasi password', 'min_length[5]|matches[password]', array('matches' => '%s tidak sesuai dengan password' ));
         }
     	$this->form_validation->set_rules('alamat', 'Alamat', 'required');
-    	$this->form_validation->set_rules('nmr_induk', 'Nomor_Induk', 'r`equired|min_length[1]|numeric');
     	$this->form_validation->set_rules('nomor', 'Nomor Telepon', 'required|numeric');
     	$this->form_validation->set_rules('level', 'Level', 'required');
         // set message opsi validation
@@ -79,15 +78,13 @@ class User extends CI_Controller {
                         show_404();
                     }
 			    	
-                }
-                else
-                {
+                }else{
                 	$post = $this->input->post(null, TRUE);
                 	$this->m_user->edit($post);
                     // echo json_encode($post);
                     // die();
                 	if ($this->db->affected_rows() > 0) {
-                		$this->session->set_flashdata('kk', 'data berhasil ditambahkan');
+                		$this->session->set_flashdata('sukses', 'data berhasil ditambahkan');
                 	}
                 	$this->session->set_flashdata('gagal', 'data gagal ditambkan');
                 	redirect('user/edit/'.$id,'refresh');

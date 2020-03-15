@@ -28,20 +28,26 @@ class Auth extends CI_Controller {
             //   cek user
             if ($query->num_rows() > 0) {
             $row = $query->row();
-            $params = array(
+            if ($row->is_active == 1) {
+                 $params = array(
                 'id' => $row->id,
                 'level' => $row->level
             );
             // echo json_encode($row);die();
             $this->session->set_userdata($params);
+            }
+            // cek jika sudah login
+            if($this->session->userdata('logged_in')) redirect(base_url('dashboard'));
+            // login dengan role siswa
             if ($this->session->userdata('level') == 'siswa') {
                 redirect('ppdb','refresh');
             }
+            // login dengan role admin atau petugas
             $this->session->set_flashdata('sukses', 'Selamat data di pengelolahan data siswa');
             redirect('dashboard');
           }else {
-              $this->session->set_flashdata('pesan', 'username / pass tidak valid');
-              redirect('auth');
+            $this->session->set_flashdata('gagal', 'username / pass tidak valid atau sudah tidak aktif silahkan hubungi admin');
+              redirect('auth');   
           }
       }
     }
